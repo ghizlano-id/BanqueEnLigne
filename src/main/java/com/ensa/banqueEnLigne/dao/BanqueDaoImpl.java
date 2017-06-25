@@ -1,6 +1,7 @@
 package com.ensa.banqueEnLigne.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ensa.banqueEnLigne.entity.Compte;
 import com.ensa.banqueEnLigne.entity.CompteCourant;
+import com.ensa.banqueEnLigne.entity.Operation;
 import com.ensa.banqueEnLigne.entity.Retrait;
 import com.ensa.banqueEnLigne.entity.Versement;
 
@@ -76,6 +78,14 @@ public class BanqueDaoImpl implements IBanqueDao{
 		retirer(codeCpte1,montant);
 		verser(codeCpte2,montant);
 
+	}
+	@Transactional
+	public List<Operation> getAll(String codeCpte) {
+		
+		List<Operation> res=(List<Operation>)getSessionFactory().getCurrentSession().createQuery("FROM Operation op WHERE op.compte.codeCompte='"+codeCpte+"' ORDER BY op.dateOperation DESC").setMaxResults(5).list();
+		
+		
+		  return res ; 
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.ensa.banqueEnLigne.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ensa.banqueEnLigne.dao.IBanqueDao;
 import com.ensa.banqueEnLigne.entity.Compte;
+import com.ensa.banqueEnLigne.entity.Operation;
 
 @Controller
 public class Testo {
@@ -33,6 +36,18 @@ public class Testo {
 	}
 	
 	
+/*	@RequestMapping(value="/test")
+	public ModelAndView afficher2(){
+		ModelAndView model=new ModelAndView("test");
+		 List<Operation> l = bdao.getAll("CC1") ;
+		 for(Operation o : l )
+			 
+		 System.out.println(o.getNumero());
+		return model;
+	}*/
+	
+	
+	
 
 	@RequestMapping(value="/consulerCompte",method = RequestMethod.GET)
 	public ModelAndView afficher(@RequestParam("code")String code){
@@ -40,7 +55,12 @@ public class Testo {
 		try{
 		Compte compte=bdao.consulterCompte(code);
 			model.addObject("compte",compte);
+			 List<Operation> operations = bdao.getAll(code) ;
+			 model.addObject("operations",operations) ;
+			 
+			 
 		}catch(Exception e){
+			
 			model.addObject("exception",e);
 		}
 		

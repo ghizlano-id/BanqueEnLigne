@@ -33,7 +33,11 @@
 		    				<button type="submit" class="btn btn-success">ok</button>
 		    			</div>
 		    		</form>
-		    		
+		    		<c:if test="${exception ne null}" >
+		    		<div class="text-danger">
+		    		 <label>Compte introuvable</label>
+		    		</div>
+		    		</c:if>
 		    	</div>
 			</div>
 			<div class="panel panel-success">
@@ -74,7 +78,43 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-md-6">
+		  <div class="panel panel-success">
+		  
+		     <div class="panel-heading">Opération sur le compte</div>
+		    
+		     <div class="panel-body">
+		      <c:if test="${compte ne null}" >
+		       <label>hey</label>
+		     </c:if>
+		     </div>
+		  </div>
+		<div class="panel panel-success">
+		   <div class="panel-heading">Liste des opérations </div>
+		 
+		   <div class="panel-body">
+		    <c:if test="${compte ne null}" >
+		    <table class="table table-striped">
+		    
+		     <tr>
+	             <th>Num</th><th>Type</th>	<th>Date</th><th>Montant</th>		    
+		     </tr>
+		       <c:forEach var="op" items="${operations}" >
+		      <tr>
+		          <td><c:out value="${op.numero}"/></td>
+		          <td><c:out value="${op['class'].simpleName}"/></td>
+                  <td><c:out value="${op.dateOperation}"/></td>		      
+		          <td><c:out value="${op.montant}"/></td>
+		      </tr>
+		      </c:forEach>
+		    </table>
+		   </c:if>
+		   </div>
 		
+		
+		</div>
+		
+		</div>
 	</section>
 	<footer> 	
 		<div class="navbar-fixed-bottom">
