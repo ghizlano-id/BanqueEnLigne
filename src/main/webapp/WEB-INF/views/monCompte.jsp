@@ -80,43 +80,74 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="panel panel-success">
 
-				<div class="panel-heading">Opération sur le compte</div>
-
-				<div class="panel-body">
-					<c:if test="${compte ne null}">
-						<label>hey</label>
-					</c:if>
-				</div>
-			</div>
-			<div class="panel panel-success">
-				<div class="panel-heading">Liste des opérations</div>
-
-				<div class="panel-body">
-					<c:if test="${compte ne null}">
-						<table class="table table-striped">
-
-							<tr>
-								<th>Num</th>
-								<th>Type</th>
-								<th>Date</th>
-								<th>Montant</th>
-							</tr>
-							<c:forEach var="op" items="${operations}">
-								<tr>
-									<td><c:out value="${op.numero}" /></td>
-									<td><c:out value="${op['class'].simpleName}" /></td>
-									<td><c:out value="${op.dateOperation}" /></td>
-									<td><c:out value="${op.montant}" /></td>
-								</tr>
-							</c:forEach>
-						</table>
-					</c:if>
-				</div>
-
-
-			</div>
+		  <div class="panel panel-success">
+		  
+		     <div class="panel-heading">Opération sur le compte</div>
+		    
+		     <div class="panel-body">
+		      <c:if test="${compte ne null}" >
+		     <form action="operation" method="GET">
+		     
+		         <div>
+		             <label>Compte</label>
+		             <input type="hidden" name="codeCompte"
+		              value="${compte.codeCompte}"/>
+		             <label><c:out value="${compte.codeCompte}" /></label>
+		              
+		     
+		         </div>
+		         <div>
+		         <input type="radio" name="typeOperation" value="VERS" checked="checked" onchange="document.getElementById('forVirement').style.display='none'"/>
+		         <label>Versement</label>
+		         <input type="radio" name="typeOperation" value="RET"checked="checked" onchange="document.getElementById('forVirement').style.display='none'"/>
+		         <label>Retrait</label>
+		         <input type="radio" name="typeOperation" value="VIR" checked="checked" onchange="document.getElementById('forVirement').style.display='block'"/>
+		         <label>Virement</label>
+		         
+		     </div>
+		     
+		     <div id="forVirement">
+		        <label>Vers:</label>
+		        <input type="text" name="codeCompte2"/>
+		      </div>
+		     
+		      <div>
+		        <label>Montant:</label>
+		        <input type="text" name="montant"/>
+		      </div>
+		      <button type="submit" class="btn btn-success">Save</button>
+		     
+		     
+		     </form>
+		     </c:if>
+		     </div>
+		  </div>
+		<div class="panel panel-success">
+		   <div class="panel-heading">Liste des opérations </div>
+		 
+		   <div class="panel-body">
+		    <c:if test="${compte ne null}" >
+		    <table class="table table-striped">
+		    
+		     <tr>
+	             <th>Num</th><th>Type</th>	<th>Date</th><th>Montant</th>		    
+		     </tr>
+		       <c:forEach var="op" items="${operations}" >
+		      <tr>
+		          <td><c:out value="${op.numero}"/></td>
+		          <td><c:out value="${op['class'].simpleName}"/></td>
+                  <td><c:out value="${op.dateOperation}"/></td>		      
+		          <td><c:out value="${op.montant}"/></td>
+		      </tr>
+		      </c:forEach>
+		    </table>
+		   </c:if>
+		   </div>
+		
+		
+		</div>
+		
 
 		</div>
 	</section>

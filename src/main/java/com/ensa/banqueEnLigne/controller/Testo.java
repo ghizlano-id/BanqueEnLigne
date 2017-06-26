@@ -2,11 +2,13 @@ package com.ensa.banqueEnLigne.controller;
 
 import java.util.List;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,5 +75,40 @@ public class Testo {
 		
 		return model;
 	}
+	
+	//////////////////////
+	
+	
+	@RequestMapping(value="/operation",method = RequestMethod.GET)
+	public ModelAndView afficher2(@RequestParam("typeOperation")String typeOperation,@RequestParam("codeCompte") String codeCompte , @RequestParam("montant")double montant  , @RequestParam("codeCompte2")String codeCompte2)
+		
+		{
+		
+		ModelAndView model = new ModelAndView() ;
+		
+		System.out.println(typeOperation+" "+codeCompte+" "+montant+" "+codeCompte2);
+		
+		try{
+		 
+			if(typeOperation.equals("VERS"))
+				bdao.verser(codeCompte, montant);
+			
+			else if(typeOperation.equals("RET"))
+				bdao.retirer(codeCompte, montant);
+			
+			if(typeOperation.equals("VIR"))
+				bdao.virement(codeCompte,codeCompte2, montant);
+			
+		}catch(Exception e){
+			
+			model.addObject("exception",e); 
+			
+		}
+		 model.setViewName("redirect:/consulerCompte?code="+codeCompte);
+		return model;
+	}
+	
+	
+	
 
 }
