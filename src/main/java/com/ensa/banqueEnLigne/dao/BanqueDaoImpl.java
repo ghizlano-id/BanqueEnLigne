@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ensa.banqueEnLigne.entity.Client;
 import com.ensa.banqueEnLigne.entity.Compte;
 import com.ensa.banqueEnLigne.entity.CompteCourant;
 import com.ensa.banqueEnLigne.entity.Operation;
@@ -86,6 +87,15 @@ public class BanqueDaoImpl implements IBanqueDao{
 		
 		
 		  return res ; 
+	}
+	@Transactional
+	public Client estClient(String login, String mdp) {
+		Client client=(Client) getSessionFactory().getCurrentSession().createQuery("From Client c where c.login='"+login+"' and mdp='"+mdp+"'").uniqueResult();
+		
+		if(client==null)
+			throw new RuntimeException("Mot de pass ou login incorrect");
+		
+		return client;
 	}
 
 }

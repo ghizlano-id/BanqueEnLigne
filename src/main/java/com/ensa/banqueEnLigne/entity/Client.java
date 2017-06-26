@@ -14,6 +14,8 @@ public class Client {
 	private long code;
 	private String nom;
 	private String email;
+	private String login;
+	private String mdp;
 	@OneToMany(mappedBy="client")  //Dans la clasee Compte
 	private Collection<Compte> comptes;
 	
@@ -41,5 +43,17 @@ public class Client {
 	}
 	public void setComptes(Collection<Compte> comptes) {
 		this.comptes = comptes;
+	}
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	public String getMdp() {
+		return mdp;
+	}
+	public void setMdp(String mdp) {
+		this.mdp = mdp;
 	}
 }

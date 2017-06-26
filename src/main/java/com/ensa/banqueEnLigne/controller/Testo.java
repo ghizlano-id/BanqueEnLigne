@@ -2,6 +2,9 @@ package com.ensa.banqueEnLigne.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,14 +53,18 @@ public class Testo {
 	
 
 	@RequestMapping(value="/consulerCompte",method = RequestMethod.GET)
-	public ModelAndView afficher(@RequestParam("code")String code){
+	public ModelAndView afficher(@RequestParam("code")String code,HttpServletRequest req){
 		ModelAndView model=new ModelAndView("monCompte");
+		HttpSession session=req.getSession(true);
 		try{
 		Compte compte=bdao.consulterCompte(code);
+		 if(compte.getClient().getCode()!=((Long)session.getAttribute("codeClient")))
+			 model.addObject("exception","code compte invalid");
+		 else{
 			model.addObject("compte",compte);
 			 List<Operation> operations = bdao.getAll(code) ;
 			 model.addObject("operations",operations) ;
-			 
+		 }
 			 
 		}catch(Exception e){
 			
