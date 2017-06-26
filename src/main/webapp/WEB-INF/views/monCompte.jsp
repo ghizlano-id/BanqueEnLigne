@@ -85,7 +85,39 @@
 		    
 		     <div class="panel-body">
 		      <c:if test="${compte ne null}" >
-		       <label>hey</label>
+		     <form action="operation" method="GET">
+		     
+		         <div>
+		             <label>Compte</label>
+		             <input type="hidden" name="codeCompte"
+		              value="${compte.codeCompte}"/>
+		             <label><c:out value="${compte.codeCompte}" /></label>
+		              
+		     
+		         </div>
+		         <div>
+		         <input type="radio" name="typeOperation" value="VERS" checked="checked" onchange="document.getElementById('forVirement').style.display='none'"/>
+		         <label>Versement</label>
+		         <input type="radio" name="typeOperation" value="RET"checked="checked" onchange="document.getElementById('forVirement').style.display='none'"/>
+		         <label>Retrait</label>
+		         <input type="radio" name="typeOperation" value="VIR" checked="checked" onchange="document.getElementById('forVirement').style.display='block'"/>
+		         <label>Virement</label>
+		         
+		     </div>
+		     
+		     <div id="forVirement">
+		        <label>Vers:</label>
+		        <input type="text" name="codeCompte2"/>
+		      </div>
+		     
+		      <div>
+		        <label>Montant:</label>
+		        <input type="text" name="montant"/>
+		      </div>
+		      <button type="submit" class="btn btn-success">Save</button>
+		     
+		     
+		     </form>
 		     </c:if>
 		     </div>
 		  </div>
