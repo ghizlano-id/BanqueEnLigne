@@ -6,7 +6,8 @@
 <head>
 <title>Mon compte</title>
 	<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
-
+</head>
+<body>
 	<header>
 		<div class="navbar navbar-default">
 			<div class="container-fluid">
