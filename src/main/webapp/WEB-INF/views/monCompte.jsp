@@ -98,14 +98,14 @@
 		         <div>
 		         <input type="radio" name="typeOperation" value="VERS" checked="checked" onchange="document.getElementById('forVirement').style.display='none'"/>
 		         <label>Versement</label>
-		         <input type="radio" name="typeOperation" value="RET"checked="checked" onchange="document.getElementById('forVirement').style.display='none'"/>
+		         <input type="radio" name="typeOperation" value="RET" onchange="document.getElementById('forVirement').style.display='none'"/>
 		         <label>Retrait</label>
-		         <input type="radio" name="typeOperation" value="VIR" checked="checked" onchange="document.getElementById('forVirement').style.display='block'"/>
+		         <input type="radio" name="typeOperation" value="VIR"  onchange="document.getElementById('forVirement').style.display='block'"/>
 		         <label>Virement</label>
 		         
 		     </div>
 		     
-		     <div id="forVirement">
+		     <div id="forVirement" style="display:none">
 		        <label>Vers:</label>
 		        <input type="text" name="codeCompte2"/>
 		      </div>
@@ -114,9 +114,9 @@
 		        <label>Montant:</label>
 		        <input type="text" name="montant"/>
 		      </div>
-		      <c:if test="${exception ne null}" >
+		      <c:if test="${err ne null}" >
 		    		<div class="text-danger">
-		    		 <label><c:out value="${exception}"/></label>
+		    		 <label><c:out value="${err}" /></label>
 		    		</div>
 		    		</c:if>
 		      <button type="submit" class="btn btn-success">Save</button>

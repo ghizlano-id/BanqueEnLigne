@@ -47,10 +47,28 @@ public class Testo {
 		 System.out.println(o.getNumero());
 		return model;
 	}*/
+	//////////////////////////////////////////////////////////////////////////////////////////
 	
-	
-	
+	@RequestMapping(value="/consult",method = RequestMethod.GET)
+	public ModelAndView affiche(@RequestParam("code")String code,@RequestParam("erreur")String erreur){
+		ModelAndView model=new ModelAndView("monCompte");
+		try{
+		Compte compte=bdao.consulterCompte(code);
+			model.addObject("compte",compte);
+			 List<Operation> operations = bdao.getAll(code) ;
+			 model.addObject("operations",operations) ;
 
+         model.addObject("err",erreur);
+
+			 
+		}catch(Exception e){
+			
+			model.addObject("exception",e);
+		}
+		
+		return model;
+	}
+    ///////////////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value="/consulerCompte",method = RequestMethod.GET)
 	public ModelAndView afficher(@RequestParam("code")String code){
 		ModelAndView model=new ModelAndView("monCompte");
@@ -59,7 +77,8 @@ public class Testo {
 			model.addObject("compte",compte);
 			 List<Operation> operations = bdao.getAll(code) ;
 			 model.addObject("operations",operations) ;
-			 
+
+	
 			 
 		}catch(Exception e){
 			
@@ -89,12 +108,15 @@ public class Testo {
 			else if(typeOperation.equals("RET"))
 				bdao.retirer(codeCompte, montant);
 			
-			if(typeOperation.equals("VIR"))
+			else if(typeOperation.equals("VIR"))
 				bdao.virement(codeCompte,codeCompte2, montant);
 			
 		}catch(Exception e){
 			
-			model.addObject("exception",e); 
+			//model.addObject("erreur",e); 
+			model.setViewName("redirect:/consult?code="+codeCompte+"&erreur="+e.getMessage());
+			return model;
+			
 			
 		}
 		 model.setViewName("redirect:/consulerCompte?code="+codeCompte);
