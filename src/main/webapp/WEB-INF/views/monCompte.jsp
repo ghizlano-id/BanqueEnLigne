@@ -114,6 +114,11 @@
 		        <label>Montant:</label>
 		        <input type="text" name="montant"/>
 		      </div>
+		      <c:if test="${exception ne null}" >
+		    		<div class="text-danger">
+		    		 <label><c:out value="${exception}"/></label>
+		    		</div>
+		    		</c:if>
 		      <button type="submit" class="btn btn-success">Save</button>
 		     
 		     

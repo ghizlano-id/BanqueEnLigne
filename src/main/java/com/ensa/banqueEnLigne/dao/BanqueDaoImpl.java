@@ -75,6 +75,8 @@ public class BanqueDaoImpl implements IBanqueDao{
 	}
 	@Transactional
 	public void virement(String codeCpte1, String codeCpte2, double montant) {
+		if(codeCpte1.equals(codeCpte2))
+			throw new RuntimeException("Impossible virement sur le meme compte") ; 
 		retirer(codeCpte1,montant);
 		verser(codeCpte2,montant);
 
