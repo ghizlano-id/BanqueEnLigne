@@ -40,8 +40,7 @@ public class Testo {
 		return model;
 	}
 	
-	
-/*	@RequestMapping(value="/test")
+	/*	@RequestMapping(value="/test")
 	public ModelAndView afficher2(){
 		ModelAndView model=new ModelAndView("test");
 		 List<Operation> l = bdao.getAll("CC1") ;
@@ -64,8 +63,9 @@ public class Testo {
 			 model.addObject("exception","code compte invalid");
 		 else{
 			model.addObject("compte",compte);
-			 List<Operation> operations = bdao.getAll(code) ;
+			 List<Operation> operations = bdao.getSommeOperations(code) ;
 			 model.addObject("operations",operations) ;
+			 session.setAttribute("codeCpte", code);
 		 }
 			 
 		}catch(Exception e){
@@ -107,6 +107,29 @@ public class Testo {
 		 model.setViewName("redirect:/consulerCompte?code="+codeCompte);
 		return model;
 	}
+	@RequestMapping(value="/tableOperations")
+	public ModelAndView AllOperations(HttpServletRequest rq){
+		ModelAndView model=new ModelAndView("test");
+		HttpSession session=rq.getSession(true);
+		String codeCpte=(String) session.getAttribute("codeCpte"); //!!!!
+		
+		 List<Operation> operations=bdao.getAllOperations(codeCpte);
+		 
+		 model.addObject("allOperations", operations);
+		 
+		
+		return model;
+	}
+	@RequestMapping(value="/goCompte")
+	public ModelAndView monCompte(HttpServletRequest rq){
+		ModelAndView model=new ModelAndView();
+		HttpSession session=rq.getSession(true);
+		String codeCpte=(String) session.getAttribute("codeCpte");
+		
+		 model.setViewName("redirect:/consulerCompte?code="+codeCpte);
+			return model;
+	}
+	
 	
 	
 	

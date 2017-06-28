@@ -18,14 +18,12 @@
 				<form action="compte" method="POST">
 					<div class="form-group row">
 						<div class="col-xs-8">
-							<label>Login</label> <input type="text" name="login"
-								class="form-control" />
+							<label>Login</label> <input type="text" name="login" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="col-xs-8">
-							<label>Mot de passe</label> <input type="password" name="mdp"
-								class="form-control" />
+							<label>Mot de passe</label> <input type="password" name="mdp" class="form-control" />
 						</div>
 					</div>
 					<div >
@@ -40,5 +38,8 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
 </body>
 </html>

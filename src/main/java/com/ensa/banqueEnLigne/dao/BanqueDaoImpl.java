@@ -81,13 +81,20 @@ public class BanqueDaoImpl implements IBanqueDao{
 
 	}
 	@Transactional
-	public List<Operation> getAll(String codeCpte) {
+	public List<Operation> getSommeOperations(String codeCpte) {
 		
 		List<Operation> res=(List<Operation>)getSessionFactory().getCurrentSession().createQuery("FROM Operation op WHERE op.compte.codeCompte='"+codeCpte+"' ORDER BY op.dateOperation DESC").setMaxResults(5).list();
 		
 		
 		  return res ; 
 	}
+	@Transactional
+	public List<Operation> getAllOperations(String codeCpte) {
+		List<Operation> operations=(List<Operation>)getSessionFactory().getCurrentSession().createQuery("FROM Operation op WHERE op.compte.codeCompte='"+codeCpte+"' ORDER BY op.dateOperation DESC").list();
+		return operations;
+	}
+
+	
 	@Transactional
 	public Client estClient(String login, String mdp) {
 		Client client=(Client) getSessionFactory().getCurrentSession().createQuery("From Client c where c.login='"+login+"' and mdp='"+mdp+"'").uniqueResult();
@@ -98,4 +105,6 @@ public class BanqueDaoImpl implements IBanqueDao{
 		return client;
 	}
 
+	
+	
 }

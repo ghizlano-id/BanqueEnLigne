@@ -11,7 +11,8 @@ public interface IBanqueDao {
 	public void verser(String codeCpte,double montant);
 	public void retirer(String codeCpte,double montant);
 	public void virement(String codeCpte1,String codeCpte2,double montant);
-	public List<Operation> getAll(String codeCpte) ; 
+	public List<Operation> getSommeOperations(String codeCpte) ; 
+	public List<Operation> getAllOperations(String codeCpte) ;
 	public Client estClient(String login,String mdp);
 
 }

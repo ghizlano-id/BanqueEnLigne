@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE >
 <html>
 <head>
@@ -13,7 +14,7 @@
 		<div class="navbar navbar-default">
 			<div class="container-fluid">
 				<ul class="nav navbar-nav">
-					<li><a>Operation</a></li>
+					<li><a href="<c:url value="/tableOperations"/>" >Operation</a></li>
 					<li><a>Comptes</a></li>
 					<li><a href="<c:url value="/login"/>">Deconnexion</a></li>
 				</ul>
@@ -28,10 +29,13 @@
 					<h3 class="panel-title">Consulter mon compte</h3>
 				</div>
 				<div class="panel-body">
-					<form action="consulerCompte" method="GET">
+					<form action="consulerCompte" method="GET" class="form-horizontal">
 						<div class="form-group">
-							<label>Code de compte</label> <input type="text" name="code"  />
-							<button type="submit" class="btn btn-success">ok</button>
+							<label class="col-sm-3 control-label">Code de compte</label>
+							<div class="col-sm-6">
+						        <input class="form-control" type="text" name="code">
+						      </div>
+							<button type="submit" class="btn btn-success">Rechercher</button>
 						</div>
 					</form>
 					<c:if test="${exception ne null}">
@@ -81,73 +85,85 @@
 		</div>
 		<div class="col-md-6">
 
-		  <div class="panel panel-success">
-		  
-		     <div class="panel-heading">Opération sur le compte</div>
-		    
-		     <div class="panel-body">
-		      <c:if test="${compte ne null}" >
-		     <form action="operation" method="GET">
-		     
-		         <div>
-		             <label>Compte</label>
-		             <input type="hidden" name="codeCompte"
-		              value="${compte.codeCompte}"/>
-		             <label><c:out value="${compte.codeCompte}" /></label>
-		              
-		     
-		         </div>
-		         <div>
-		         <input type="radio" name="typeOperation" value="VERS" checked="checked" onchange="document.getElementById('forVirement').style.display='none'"/>
-		         <label>Versement</label>
-		         <input type="radio" name="typeOperation" value="RET"checked="checked" onchange="document.getElementById('forVirement').style.display='none'"/>
-		         <label>Retrait</label>
-		         <input type="radio" name="typeOperation" value="VIR" checked="checked" onchange="document.getElementById('forVirement').style.display='block'"/>
-		         <label>Virement</label>
-		         
-		     </div>
-		     
-		     <div id="forVirement">
-		        <label>Vers:</label>
-		        <input type="text" name="codeCompte2"/>
-		      </div>
-		     
-		      <div>
-		        <label>Montant:</label>
-		        <input type="text" name="montant"/>
-		      </div>
-		      <button type="submit" class="btn btn-success">Save</button>
-		     
-		     
-		     </form>
-		     </c:if>
-		     </div>
-		  </div>
-		<div class="panel panel-success">
-		   <div class="panel-heading">Liste des opérations </div>
-		 
-		   <div class="panel-body">
-		    <c:if test="${compte ne null}" >
-		    <table class="table table-striped">
-		    
-		     <tr>
-	             <th>Num</th><th>Type</th>	<th>Date</th><th>Montant</th>		    
-		     </tr>
-		       <c:forEach var="op" items="${operations}" >
-		      <tr>
-		          <td><c:out value="${op.numero}"/></td>
-		          <td><c:out value="${op['class'].simpleName}"/></td>
-                  <td><c:out value="${op.dateOperation}"/></td>		      
-		          <td><c:out value="${op.montant}"/></td>
-		      </tr>
-		      </c:forEach>
-		    </table>
-		   </c:if>
-		   </div>
-		
-		
-		</div>
-		
+			<div class="panel panel-success">
+
+				<div class="panel-heading">Opération sur le compte</div>
+
+				<div class="panel-body">
+					<c:if test="${compte ne null}">
+						<form action="operation" method="GET" class="form-horizontal">
+
+							<div>
+								<label>Compte</label> 
+								<input type="hidden" name="codeCompte" value="${compte.codeCompte}" /> 
+								<label><c:out value="${compte.codeCompte}" /></label>
+
+
+							</div>
+							<div>
+								<input type="radio" name="typeOperation" value="VERS"
+									checked="checked"
+									onchange="document.getElementById('forVirement').style.display='none'" />
+								<label>Versement</label> <input type="radio"
+									name="typeOperation" value="RET" checked="checked"
+									onchange="document.getElementById('forVirement').style.display='none'" />
+								<label>Retrait</label> <input type="radio" name="typeOperation"
+									value="VIR" checked="checked"
+									onchange="document.getElementById('forVirement').style.display='block'" />
+								<label>Virement</label>
+
+							</div>
+							<div >
+								<div id="forVirement" class="form-group">
+									<label class="col-sm-2 control-label">Vers:</label> 
+									<div class="col-sm-6">
+								        <input class="form-control" name="codeCompte2"  type="text" >
+								     </div>
+								</div>
+								
+								<div  class="form-group">
+									<label class="col-sm-2 control-label">Montant:</label> 
+									<div class="col-sm-6">
+								        <input class="form-control" name="montant"  type="text" >
+								     </div>
+								     
+								</div>
+							</div>
+							<button type="submit" class="btn btn-success" style="margin-left: 360px;">Save</button>
+
+
+						</form>
+					</c:if>
+				</div>
+			</div>
+			<div class="panel panel-success">
+				<div class="panel-heading">Liste des dernieres opérations</div>
+
+				<div class="panel-body">
+					<c:if test="${compte ne null}">
+						<table class="table table-striped">
+
+							<tr>
+								<th>Num</th>
+								<th>Type</th>
+								<th>Date</th>
+								<th>Montant</th>
+							</tr>
+							<c:forEach var="op" items="${operations}">
+								<tr>
+									<td><c:out value="${op.numero}" /></td>
+									<td><c:out value="${op['class'].simpleName}" /></td>
+									<td><c:out value="${op.dateOperation}" /></td>
+									<td><c:out value="${op.montant}" /></td>
+								</tr>
+							</c:forEach>
+						</table>
+					</c:if>
+				</div>
+
+
+			</div>
+
 
 		</div>
 	</section>
