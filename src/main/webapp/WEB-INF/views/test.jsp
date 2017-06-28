@@ -13,10 +13,14 @@
 	<header>
 		<div class="navbar navbar-default">
 			<div class="container-fluid">
+				<div class="navbar-header">
+			      <a class="navbar-brand titre" href="#">Banque En Ligne</a>
+			    </div>
 				<ul class="nav navbar-nav">
-					<li><a>Operation</a></li>
 					<li><a href="<c:url value="/goCompte"/>" > Mon Compte</a></li>
-					<li><a href="<c:url value="/login"/>">Deconnexion</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="<c:url value="/login"/>"><span class="glyphicon glyphicon-off" aria-hidden="true" style="margin-right: 10px;"></span>Deconnexion</a></li>
 				</ul>
 			</div>
 		</div>

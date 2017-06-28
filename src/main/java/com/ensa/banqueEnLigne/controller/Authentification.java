@@ -32,7 +32,7 @@ public class Authentification {
 	@RequestMapping(value="/login")
 	public ModelAndView afficher(){
 		ModelAndView model=new ModelAndView("authentification");
-
+		
 		return model;
 	}
 
@@ -43,6 +43,8 @@ public class Authentification {
 			Client client=bdao.estClient(login, mdp);
 			HttpSession session=req.getSession();
 			  session.setAttribute("codeClient", client.getCode());
+			session.setAttribute("codeCpte",null);//
+
 			return new ModelAndView("redirect:/monCompte");
 		}catch(Exception e){
 			ModelAndView model=new ModelAndView("authentification");

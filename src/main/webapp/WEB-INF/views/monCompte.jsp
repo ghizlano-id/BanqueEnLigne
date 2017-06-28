@@ -8,15 +8,20 @@
 <title>Mon compte</title>
 <link rel="stylesheet" type="text/css"
 	href="resources/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="resources/CSS/styles.css" />
 </head>
 <body>
 	<header>
-		<div class="navbar navbar-default">
+		<div class="navbar navbar-default ">
 			<div class="container-fluid">
+				<div class="navbar-header ">
+			      <a class="navbar-brand titre" href="#"> Banque En Ligne</a>
+			    </div>
 				<ul class="nav navbar-nav">
 					<li><a href="<c:url value="/tableOperations"/>" >Operation</a></li>
-					<li><a>Comptes</a></li>
-					<li><a href="<c:url value="/login"/>">Deconnexion</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="<c:url value="/login"/>"><span class="glyphicon glyphicon-off" aria-hidden="true" style="margin-right: 10px;"></span>Deconnexion</a></li>
 				</ul>
 			</div>
 		</div>
@@ -85,6 +90,7 @@
 		</div>
 		<div class="col-md-6">
 
+
 			<div class="panel panel-success">
 
 				<div class="panel-heading">Opération sur le compte</div>
@@ -102,7 +108,7 @@
 							</div>
 							<div>
 								<input type="radio" name="typeOperation" value="VERS"
-									checked="checked"
+									checked="checked" 
 									onchange="document.getElementById('forVirement').style.display='none'" />
 								<label>Versement</label> <input type="radio"
 									name="typeOperation" value="RET" checked="checked"
@@ -117,17 +123,21 @@
 								<div id="forVirement" class="form-group">
 									<label class="col-sm-2 control-label">Vers:</label> 
 									<div class="col-sm-6">
-								        <input class="form-control" name="codeCompte2"  type="text" >
+								        <input class="form-control" name="codeCompte2"  type="text" required="required" >
 								     </div>
 								</div>
 								
 								<div  class="form-group">
 									<label class="col-sm-2 control-label">Montant:</label> 
 									<div class="col-sm-6">
-								        <input class="form-control" name="montant"  type="text" >
-								     </div>
-								     
+								        <input class="form-control" name="montant"  type="text" required="required" >
+								     </div>     
 								</div>
+								<c:if test="${err ne null}" >
+						    		<div class="text-danger">
+						    		 <label><c:out value="${err}" /></label>
+						    		</div>
+					    		</c:if>
 							</div>
 							<button type="submit" class="btn btn-success" style="margin-left: 360px;">Save</button>
 
@@ -163,6 +173,7 @@
 
 
 			</div>
+
 
 
 		</div>
