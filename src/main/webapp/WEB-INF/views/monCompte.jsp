@@ -18,7 +18,7 @@
 			      <a class="navbar-brand titre" href="#"> Banque En Ligne</a>
 			    </div>
 				<ul class="nav navbar-nav">
-					<li><a href="<c:url value="/tableOperations"/>" >Operation</a></li>
+					<li><a href="<c:url value="/tableOperations"/>" >Operations</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="<c:url value="/login"/>"><span class="glyphicon glyphicon-off" aria-hidden="true" style="margin-right: 10px;"></span>Deconnexion</a></li>
